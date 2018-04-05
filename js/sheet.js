@@ -211,8 +211,8 @@ function LoadSpread(json) {
     /** Defining what the current time is **/
     const now = new Date();
         let currentTime = now.getHours() + ":" + now.getMinutes();
-        currentTime = tijdVoorOntbijt;
-        console.log(currentTime);
+        //currentTime = tijdVoorOntbijt;  //this line is commented out so the current computer time is used instead of the breakfast time
+        //console.log(currentTime);
 
     /** Function to show the right window according to the time **/
     function showochtend(){
@@ -525,98 +525,131 @@ function LoadSpread(json) {
         herinneringAvond();
         herinneringTussendoorAvond();
        
-    }         
+	   
+
+
+		//check if there is a value for the counters for extra items in the cookie
+		if (getCookie("extraItems") != "") {
+			for (i in Array.from(Array(numberExtraItems).keys())) {
+				//console.log(getCookie("extraItems").split("%"));
+				extraItems[i] = parseInt(getCookie("extraItems").split("%")[i]);
+				var tempName = "extraItem" + (parseInt(i) + 1);
+				document.getElementById(tempName).innerHTML = extraItems[i] + "x";
+			}
+		}	
+			}         
 }
 
-/** Add counter on items of extra dietary options slider **/
+/** Add counter on items of extra dietary options slider - changed from Lihn's original:
+Now use a list to store all values. **/
+var extraItems = new Array(); //empty list for all counters extra items
+var numberExtraItems = 12; //number of extra items that exist
+//fill extraItems with zeroes
+for (i in Array.from(Array(numberExtraItems).keys())) { 
+	extraItems.push(0);
+}
 
-let addExtraItem1 = (function () {
-    let counter = 0;
-    return function () {return counter += 1;}
-})();
-let addExtraItem2 = (function () {
-    let counter = 0;
-    return function () {return counter += 1;}
-})();
-let addExtraItem3 = (function () {
-    let counter = 0;
-    return function () {return counter += 1;}
-})();
-let addExtraItem4 = (function () {
-    let counter = 0;
-    return function () {return counter += 1;}
-})();
-let addExtraItem5 = (function () {
-    let counter = 0;
-    return function () {return counter += 1;}
-})();
-let addExtraItem6 = (function () {
-    let counter = 0;
-    return function () {return counter += 1;}
-})();
-let addExtraItem7 = (function () {
-    let counter = 0;
-    return function () {return counter += 1;}
-})();
-let addExtraItem8 = (function () {
-    let counter = 0;
-    return function () {return counter += 1;}
-})();
-let addExtraItem9 = (function () {
-    let counter = 0;
-    return function () {return counter += 1;}
-})();
-let addExtraItem10 = (function () {
-    let counter = 0;
-    return function () {return counter += 1;}
-})();
-let addExtraItem11 = (function () {
-    let counter = 0;
-    return function () {return counter += 1;}
-})();
-let addExtraItem12 = (function () {
-    let counter = 0;
-    return function () {return counter += 1;}
-})();
+	
+//store all values in the cookie
+function cookieExtraValues() {
+	var newValues = "";
+	for (i in Array.from(Array(numberExtraItems).keys())) {
+		newValues += extraItems[i].toString();
+		newValues += "%";
+	}
+	setCookie("extraItems", newValues);
+}
 
+//changed from original
 function clickExtraItem1(){
-    document.getElementById("extraItem1").innerHTML = addExtraItem1() + "x";
+	extraItems[0] += 1;
+    document.getElementById("extraItem1").innerHTML = extraItems[0] + "x";
+	cookieExtraValues();
 }
 function clickExtraItem2(){
-    document.getElementById("extraItem2").innerHTML = addExtraItem2() + "x";
+    extraItems[1] += 1;
+    document.getElementById("extraItem2").innerHTML = extraItems[1] + "x";
+	cookieExtraValues();
 }
 function clickExtraItem3(){
-    document.getElementById("extraItem3").innerHTML = addExtraItem3() + "x";
+    extraItems[2] += 1;
+    document.getElementById("extraItem3").innerHTML = extraItems[2] + "x";
+	cookieExtraValues();
 }
 function clickExtraItem4(){
-    document.getElementById("extraItem4").innerHTML = addExtraItem4() + "x";
+    extraItems[3] += 1;
+    document.getElementById("extraItem4").innerHTML = extraItems[3] + "x";
+	cookieExtraValues();
 }
 function clickExtraItem5(){
-    document.getElementById("extraItem5").innerHTML = addExtraItem5() + "x";
+    extraItems[4] += 1;
+    document.getElementById("extraItem5").innerHTML = extraItems[4] + "x";
+	cookieExtraValues();
 }
 function clickExtraItem6(){
-    document.getElementById("extraItem6").innerHTML = addExtraItem6() + "x";
+    extraItems[5] += 1;
+    document.getElementById("extraItem6").innerHTML = extraItems[5] + "x";
+	cookieExtraValues();
 }
 function clickExtraItem7(){
-    document.getElementById("extraItem7").innerHTML = addExtraItem7() + "x";
+    extraItems[6] += 1;
+    document.getElementById("extraItem7").innerHTML = extraItems[6] + "x";
+	cookieExtraValues();
 }
 function clickExtraItem8(){
-    document.getElementById("extraItem8").innerHTML = addExtraItem8() + "x";
+    extraItems[7] += 1;
+    document.getElementById("extraItem8").innerHTML = extraItems[7] + "x";
+	cookieExtraValues();
 }
 function clickExtraItem9(){
-    document.getElementById("extraItem9").innerHTML = addExtraItem9() + "x";
+    extraItems[8] += 1;
+    document.getElementById("extraItem9").innerHTML = extraItems[8] + "x";
+	cookieExtraValues();
 }
 function clickExtraItem10(){
-    document.getElementById("extraItem10").innerHTML = addExtraItem10() + "x";
+    extraItems[9] += 1;
+    document.getElementById("extraItem10").innerHTML = extraItems[9] + "x";
+	cookieExtraValues();
 }
 function clickExtraItem11(){
-    document.getElementById("extraItem11").innerHTML = addExtraItem11() + "x";
+    extraItems[10] += 1;
+    document.getElementById("extraItem11").innerHTML = extraItems[10] + "x";
+	cookieExtraValues();
 }
 function clickExtraItem12(){
-    document.getElementById("extraItem12").innerHTML = addExtraItem12() + "x";
+    extraItems[11] += 1;
+    document.getElementById("extraItem12").innerHTML = extraItems[11] + "x";
+	cookieExtraValues();
 }
 
 
+//standard functions for cookies
+function setCookie(cname, cvalue) { 
+	//set expiration to next day 2 AM (!time zones..)
+	var d = new Date();
+	d.setDate(d.getDate() + 1);
+	d.setHours(4, 0, 0, 0); //different time zone
+	//console.log(d);
+	var expires = "expires=" + d.toUTCString();
+	
+	//create cookie
+	document.cookie = cname + "=" + cvalue + ";" + expires + "path=/";
+}
+	
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
 
 
 
