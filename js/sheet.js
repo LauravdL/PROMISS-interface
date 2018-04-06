@@ -2,6 +2,25 @@ var workbook;
 var excelIO;
 var achternaam = "A";
 
+/** Dietary advice taken **/
+var voorOntbijtGegeten = false;    
+var ontbijtGegeten = false;
+var tussendoorOchtendGegeten = false;
+var lunchGegeten = false;
+var tussendoorMiddagGegeten = false
+var avondetenGegeten = false;
+var tussendoorAvondGegeten = false;
+
+/** Taking something else than dietary advice **/
+var ietsandersVoorOntbijt = false;
+var ietsandersOntbijt = false;
+var ietsandersTussendoorOchtend = false;
+var ietsandersLunch = false;
+var ietsandersTussendoorMiddag = false;
+var ietsandersAvond = false;
+var ietsandersTussendoorAvond = false;
+
+
 $(document).ready(function () {
 	console.log('De document is ready!');
 	workbook = new GC.Spread.Sheets.Workbook();
@@ -68,47 +87,41 @@ function LoadSpread(json) {
     document.getElementById("inputAvondeten").textContent = voedingsadviesAvondeten;
     document.getElementById("inputTussendoorAvond").textContent = voedingsadviesTussendoorAvond;
 
-    /** Dietary advice taken **/
-    let voorOntbijtGegeten = false;
-    let ontbijtGegeten = false;
-    let tussendoorOchtendGegeten = false;
-    let lunchGegeten = false;
-    let tussendoorMiddagGegeten = false
-    let avondetenGegeten = false;
-    let tussendoorAvondGegeten = false;
 
-    /** Taking something else than dietary advice **/
-    let ietsandersVoorOntbijt = false
-    let ietsandersOntbijt = false
-    let ietsandersTussendoorOchtend = false
-    let ietsandersLunch = false
-    let ietsandersTussendoorMiddag = false
-    let ietsandersAvond = false
-    let ietsandersTussendoorAvond = false
-
+	//check cookie for advices
+	checkCookiesAdvice(14);
+	
+	
     /** Notification buttons **/
     $('#notification .nu-btn').click(function(){
-        if (currentTime == tijdVoorOntbijt){
+        if (currentTime == tijdVoorOntbijt ){
             $('#voorOntbijt input[type=checkbox]').prop('checked',true);
             voorOntbijtGegeten = true;
+			cookieAdvices(14, 0);
         } else if (currentTime == tijdOntbijt){
             $('#ontbijt input[type=checkbox]').prop('checked',true);
             ontbijtGegeten = true;
+			cookieAdvices(14, 1);
         } else if (currentTime == tijdTussendoorOchtend){
             $('#tussendoorOchtend input[type=checkbox]').prop('checked',true);
             tussendoorOchtendGegeten = true;
+			cookieAdvices(14, 2);
         } else if (currentTime == tijdLunch){
             $('#lunch input[type=checkbox]').prop('checked',true);
             lunchGegeten = true;
+			cookieAdvices(14, 3);
         } else if (currentTime == tijdTussendoorMiddag){
             $('#tussendoorMiddag input[type=checkbox]').prop('checked',true);
             tussendoorMiddagGegeten = true;
+			cookieAdvices(14, 4);
         } else if (currentTime == tijdAvondeten){
             $('#avondeten input[type=checkbox]').prop('checked',true);
             avondetenGegeten = true;
+			cookieAdvices(14, 5);
         } else if (currentTime == tijdTussendoorAvond){
             $('#tussendoorAvond input[type=checkbox]').prop('checked',true);
             tussendoorAvondGegeten = true;
+			cookieAdvices(14, 6);
         }
     });
     $('#notification .later-btn').click(function(){
@@ -118,18 +131,25 @@ function LoadSpread(json) {
         herinnering = false;
         if (currentTime == tijdVoorOntbijt){
             ietsandersVoorOntbijt = true;
+			cookieAdvices(14, 7);
         } else if (currentTime == tijdOntbijt){
             ietsandersOntbijt = true;
+			cookieAdvices(14, 8);
         } else if (currentTime == tijdTussendoorOchtend){
             ietsandersTussendoorOchtend = true;
+			cookieAdvices(14, 9);
         } else if (currentTime == tijdLunch){
             ietsandersLunch = true;
+			cookieAdvices(14, 10);
         } else if (currentTime == tijdTussendoorMiddag){
             ietsandersTussendoorMiddag = true;
+			cookieAdvices(14, 11);
         } else if (currentTime == tijdAvondeten){
             ietsandersAvond = true;
+			cookieAdvices(14, 12);
         } else if (currentTime == tijdTussendoorAvond){
             ietsandersTussendoorAvond = true;
+			cookieAdvices(14, 13);
         }
     });
 
@@ -139,24 +159,31 @@ function LoadSpread(json) {
         if (currentTime == tijdVoorOntbijt){
             $('#voorOntbijt input[type=checkbox]').prop('checked',true);
             voorOntbijtGegeten = true;
+			cookieAdvices(14, 0);
         } else if (currentTime == tijdOntbijt){
             $('#ontbijt input[type=checkbox]').prop('checked',true);
             ontbijtGegeten = true;
+			cookieAdvices(14, 1);
         } else if (currentTime == tijdTussendoorOchtend){
             $('#tussendoorMiddag input[type=checkbox]').prop('checked',true);
             tussendoorOchtendGegeten = true;
+			cookieAdvices(14, 2);
         } else if (currentTime == tijdLunch){
             $('#lunch input[type=checkbox]').prop('checked',true);
             lunchGegeten = true;
+			cookieAdvices(14, 3);
         } else if (currentTime == tijdTussendoorMiddag){
             $('#tussendoorMiddag input[type=checkbox]').prop('checked',true);
             tussendoorMiddagGegeten = true;
+			cookieAdvices(14, 4);
         } else if (currentTime == tijdAvondeten){
             $('#avondeten input[type=checkbox]').prop('checked',true);
             avondetenGegeten = true;
+			cookieAdvices(14, 5);
         } else if (currentTime == tijdTussendoorAvond){
             $('#tussendoorAvond input[type=checkbox]').prop('checked',true);
             tussendoorAvondGegeten = true;
+			cookieAdvices(14, 6);
         }
     });
     $('#reminder .later-btn').click(function(){
@@ -167,18 +194,25 @@ function LoadSpread(json) {
         herinnering = false;
         if (currentTime == tijdVoorOntbijt){
             ietsandersVoorOntbijt = true;
+			cookieAdvices(14, 7);
         } else if (currentTime == tijdOntbijt){
             ietsandersOntbijt = true;
+			cookieAdvices(14, 8);
         } else if (currentTime == tijdTussendoorOchtend){
             ietsandersTussendoorOchtend = true;
+			cookieAdvices(14, 9);
         } else if (currentTime == tijdLunch){
             ietsandersLunch = true;
+			cookieAdvices(14, 10);
         } else if (currentTime == tijdTussendoorMiddag){
             ietsandersTussendoorMiddag = true;
+			cookieAdvices(14, 11);
         } else if (currentTime == tijdAvondeten){
             ietsandersAvond = true;
+			cookieAdvices(14, 12);
         } else if (currentTime == tijdTussendoorAvond){
             ietsandersTussendoorAvond = true;
+			cookieAdvices(14, 13);
         }
     });
 
@@ -211,7 +245,7 @@ function LoadSpread(json) {
     /** Defining what the current time is **/
     const now = new Date();
         let currentTime = now.getHours() + ":" + now.getMinutes();
-        //currentTime = tijdVoorOntbijt;  //this line is commented out so the current computer time is used instead of the breakfast time
+        currentTime = tijdVoorOntbijt;  //this line is commented out so the current computer time is used instead of the breakfast time
         //console.log(currentTime);
 
     /** Function to show the right window according to the time **/
@@ -527,7 +561,7 @@ function LoadSpread(json) {
        
 	   
 
-
+/*
 		//check if there is a value for the counters for extra items in the cookie
 		if (getCookie("extraItems") != "") {
 			for (i in Array.from(Array(numberExtraItems).keys())) {
@@ -536,9 +570,39 @@ function LoadSpread(json) {
 				var tempName = "extraItem" + (parseInt(i) + 1);
 				document.getElementById(tempName).innerHTML = extraItems[i] + "x";
 			}
-		}	
-			}         
+		}*/	
+			}        
+
+
+
+	//check if the checkboxes are turned off by user, ask for permission
+	$("#voorOntbijtCheck").on('change', function() {
+		this.checked=!this.checked?!confirm('Weet u zeker dat u dit wil uitvinken?'):true;
+	});
+	$("#ontbijtCheck").on('change', function() {
+		this.checked=!this.checked?!confirm('Weet u zeker dat u dit wil uitvinken?'):true;
+    });
+    $("#tussendoorOchtendCheck").on('change', function() {
+		this.checked=!this.checked?!confirm('Weet u zeker dat u dit wil uitvinken?'):true;
+    });
+    $("#lunchCheck").on('change', function() {
+        this.checked=!this.checked?!confirm('Weet u zeker dat u dit wil uitvinken?'):true;
+    });
+    $("#tussendoorMiddagCheck").on('change', function() {
+        this.checked=!this.checked?!confirm('Weet u zeker dat u dit wil uitvinken?'):true;
+    });
+    $("#avondetenCheck").on('change', function() {
+        this.checked=!this.checked?!confirm('Weet u zeker dat u dit wil uitvinken?'):true;
+
+    });
+    $("#tussendoorAvondCheck").on('change', function() {
+        this.checked=!this.checked?!confirm('Weet u zeker dat u dit wil uitvinken?'):true;
+    });			
 }
+
+
+
+
 
 /** Add counter on items of extra dietary options slider - changed from Lihn's original:
 Now use a list to store all values. **/
@@ -622,6 +686,97 @@ function clickExtraItem12(){
 	cookieExtraValues();
 }
 
+//create/rewrite a cookie for the advice checkboxes
+function cookieAdvices(numberAdvices, indexAdvice) {
+	var oldValue = getCookie("advice"); //get the old value of the cookie
+	var newValues = ""; //create a new empty cookie value
+	
+	//check if the old cookie was empty 
+	if (oldValue == "") {
+		var newValues = "";
+		for (i in Array.from(Array(numberAdvices).keys())) { //fill it with zeroes
+			newValues += 0;
+			newValues += "%";
+		}
+	}
+	
+	else {
+		var newValuesList = oldValue.split("%"); //new value is a list of the values in the old value string
+		
+		//replace the value for the checkboxs of the selected index 
+		if (newValuesList[indexAdvice] == 1) {
+			newValuesList[indexAdvice] = 0; 
+		} else {
+			newValuesList[indexAdvice] = 1;
+		}
+		
+		//make a string of all  values
+		for (i in Array.from(Array(numberAdvices).keys())) { 
+			newValues += newValuesList[i];
+			newValues += "%";
+		}
+	}
+	
+	setCookie("advice", newValues);
+	console.log(document.cookie);
+}
+
+//check the cookie for the advice checkboxes
+function checkCookiesAdvice(numberOfAdvices) {
+	for (i in Array.from(Array(numberOfAdvices).keys())) {
+		i = parseInt(i);
+		if (parseInt(getCookie("advice").split("%")[i]) != 0) {
+			switch (i) {
+				case 0:
+					voorOntbijtGegeten = true;
+					$('#voorOntbijt input[type=checkbox]').prop('checked',true);
+					
+					break;
+				case 1:
+					ontbijtGegeten = true;
+					break;
+				case 2:
+					tussendoorOchtendGegeten = true;
+					break;
+				case 3:
+					lunchGegeten = true;
+					break;
+				case 4:
+					tussendoorMiddagGegeten = true;
+					break;
+				case 5:
+					avondetenGegeten = true;
+					break;
+				case 6:
+					tussendoorAvondGegeten = true;
+					break;
+				case 7:
+					ietsandersVoorOntbijt = true;
+					break;
+				case 8:
+					ietsandersOntbijt = true;
+					break;
+				case 9:
+					ietsandersTussendoorOchtend = true;
+					break;
+				case 10:
+					ietsandersLunch = true;
+					break;
+				case 11:
+					ietsandersTussendoorMiddag = true;
+					break;
+				case 12:
+					ietsandersAvond = true;
+					break;
+				case 13:
+					ietsandersTussendoorAvond = true;
+					break;
+			}
+		}
+	}
+	
+}
+
 
 //standard functions for cookies
 function setCookie(cname, cvalue) { 
@@ -651,6 +806,13 @@ function getCookie(cname) {
     return "";
 }
 
+function deleteAllCookies() {
+    var cookies = document.cookie.split(";");
 
-
-
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i];
+        var eqPos = cookie.indexOf("=");
+        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
+}
