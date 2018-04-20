@@ -93,6 +93,8 @@ function LoadSpread(json) {
 	
 	
     /** Notification buttons **/
+	//The action after confirming that you've taken something 
+	//This is dependent on the current time
     $('#notification .nu-btn').click(function(){
         if (currentTime == tijdVoorOntbijt ){
             $('#voorOntbijt input[type=checkbox]').prop('checked',true);
@@ -124,9 +126,11 @@ function LoadSpread(json) {
 			cookieAdvices(14, 6);
         }
     });
+	//Action when you choose 'later' option
     $('#notification .later-btn').click(function(){
         herinnering = true; 
     });
+	//Action when you choose 'other' option
     $('#notification .anders-btn').click(function(){
         herinnering = false;
         if (currentTime == tijdVoorOntbijt){
@@ -154,6 +158,7 @@ function LoadSpread(json) {
     });
 
     /** Reminder buttons **/
+	//Happens if you confirm/later/other the reminder
     $('#reminder .nu-btn').click(function(){
         herinnering = false;
         if (currentTime == tijdVoorOntbijt){
@@ -245,7 +250,7 @@ function LoadSpread(json) {
     /** Defining what the current time is **/
     const now = new Date();
         let currentTime = now.getHours() + ":" + now.getMinutes();
-        currentTime = tijdVoorOntbijt;  //this line is commented out so the current computer time is used instead of the breakfast time
+        currentTime = tijdOntbijt;  //this line is commented out so the current computer time is used instead of the breakfast time
         //console.log(currentTime);
 
     /** Function to show the right window according to the time **/
@@ -561,7 +566,7 @@ function LoadSpread(json) {
        
 	   
 
-/*
+
 		//check if there is a value for the counters for extra items in the cookie
 		if (getCookie("extraItems") != "") {
 			for (i in Array.from(Array(numberExtraItems).keys())) {
@@ -570,7 +575,7 @@ function LoadSpread(json) {
 				var tempName = "extraItem" + (parseInt(i) + 1);
 				document.getElementById(tempName).innerHTML = extraItems[i] + "x";
 			}
-		}*/	
+		}	
 			}        
 
 
@@ -578,25 +583,67 @@ function LoadSpread(json) {
 	//check if the checkboxes are turned off by user, ask for permission
 	$("#voorOntbijtCheck").on('change', function() {
 		this.checked=!this.checked?!confirm('Weet u zeker dat u dit wil uitvinken?'):true;
+		if (this.checked && getCookie("advice").split("%")[0] != "1") {
+			cookieAdvices(14, 0);
+		}
+		else if (!this.checked && getCookie("advice").split("%")[0] != "0") {
+			cookieAdvices(14, 0);
+		}
+		
 	});
 	$("#ontbijtCheck").on('change', function() {
 		this.checked=!this.checked?!confirm('Weet u zeker dat u dit wil uitvinken?'):true;
+		if (this.checked && getCookie("advice").split("%")[1] != "1") {
+			cookieAdvices(14, 1);
+		}
+		else if (!this.checked && getCookie("advice").split("%")[1] != "0") {
+			cookieAdvices(14, 1);
+		}
     });
     $("#tussendoorOchtendCheck").on('change', function() {
 		this.checked=!this.checked?!confirm('Weet u zeker dat u dit wil uitvinken?'):true;
+		if (this.checked && getCookie("advice").split("%")[2] != "1") {
+			cookieAdvices(14, 2);
+		}
+		else if (!this.checked && getCookie("advice").split("%")[2] != "0") {
+			cookieAdvices(14, 2);
+		}
     });
     $("#lunchCheck").on('change', function() {
         this.checked=!this.checked?!confirm('Weet u zeker dat u dit wil uitvinken?'):true;
+		if (this.checked && getCookie("advice").split("%")[3] != "1") {
+			cookieAdvices(14, 3);
+		}
+		else if (!this.checked && getCookie("advice").split("%")[3] != "0") {
+			cookieAdvices(14, 3);
+		}
     });
     $("#tussendoorMiddagCheck").on('change', function() {
         this.checked=!this.checked?!confirm('Weet u zeker dat u dit wil uitvinken?'):true;
+		if (this.checked && getCookie("advice").split("%")[4] != "1") {
+			cookieAdvices(14, 4);
+		}
+		else if (!this.checked && getCookie("advice").split("%")[4] != "0") {
+			cookieAdvices(14, 4);
+		}
     });
     $("#avondetenCheck").on('change', function() {
         this.checked=!this.checked?!confirm('Weet u zeker dat u dit wil uitvinken?'):true;
-
+		if (this.checked && getCookie("advice").split("%")[5] != "1") {
+			cookieAdvices(14, 5);
+		}
+		else if (!this.checked && getCookie("advice").split("%")[5] != "0") {
+			cookieAdvices(14, 5);
+		}
     });
     $("#tussendoorAvondCheck").on('change', function() {
         this.checked=!this.checked?!confirm('Weet u zeker dat u dit wil uitvinken?'):true;
+		if (this.checked && getCookie("advice").split("%")[6] != "1") {
+			cookieAdvices(14, 6);
+		}
+		else if (!this.checked && getCookie("advice").split("%")[6] != "1") {
+			cookieAdvices(14, 6);
+		}
     });			
 }
 
@@ -718,11 +765,19 @@ function cookieAdvices(numberAdvices, indexAdvice) {
 	}
 	
 	setCookie("advice", newValues);
+	console.log("testing if cookie exists");
 	console.log(document.cookie);
 }
 
 //check the cookie for the advice checkboxes
 function checkCookiesAdvice(numberOfAdvices) {
+	console.log("current cookie");
+	console.log(getCookie("advice"));
+	if (getCookie("advice") == "") {
+		console.log("this is tested");
+		cookieAdvices(14, 0);
+	}
+	
 	for (i in Array.from(Array(numberOfAdvices).keys())) {
 		i = parseInt(i);
 		if (parseInt(getCookie("advice").split("%")[i]) != 0) {
@@ -730,45 +785,57 @@ function checkCookiesAdvice(numberOfAdvices) {
 				case 0:
 					voorOntbijtGegeten = true;
 					$('#voorOntbijt input[type=checkbox]').prop('checked',true);
-					
 					break;
 				case 1:
+					$('#ontbijt input[type=checkbox]').prop('checked',true);
 					ontbijtGegeten = true;
 					break;
 				case 2:
 					tussendoorOchtendGegeten = true;
+					$('#tussendoorOchtend input[type=checkbox]').prop('checked',true);
 					break;
 				case 3:
 					lunchGegeten = true;
+					$('#lunch input[type=checkbox]').prop('checked',true);
 					break;
 				case 4:
 					tussendoorMiddagGegeten = true;
+					$('#tussendoorMiddag input[type=checkbox]').prop('checked',true);
 					break;
 				case 5:
 					avondetenGegeten = true;
+					$('#avondeten input[type=checkbox]').prop('checked',true);
 					break;
 				case 6:
 					tussendoorAvondGegeten = true;
+					$('#tussendoorAvond input[type=checkbox]').prop('checked',true);
 					break;
 				case 7:
 					ietsandersVoorOntbijt = true;
+					$('#ietsandersVoorOntbijt input[type=checkbox]').prop('checked',true);
 					break;
 				case 8:
 					ietsandersOntbijt = true;
+					$('#ietsandersOntbijt input[type=checkbox]').prop('checked',true);
 					break;
 				case 9:
+					$('#ietsandersTussendoorOchtend input[type=checkbox]').prop('checked',true);
 					ietsandersTussendoorOchtend = true;
 					break;
 				case 10:
+					$('#ietsandersLunch input[type=checkbox]').prop('checked',true);
 					ietsandersLunch = true;
 					break;
 				case 11:
+					$('#ietsandersTussendoorMiddag input[type=checkbox]').prop('checked',true);
 					ietsandersTussendoorMiddag = true;
 					break;
 				case 12:
 					ietsandersAvond = true;
+					$('#ietsandersAvond input[type=checkbox]').prop('checked',true);
 					break;
 				case 13:
+					$('#ietsandersTussendoorAvond input[type=checkbox]').prop('checked',true);
 					ietsandersTussendoorAvond = true;
 					break;
 			}
