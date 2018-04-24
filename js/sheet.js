@@ -46,6 +46,14 @@ function ImportFile() {
     oReq.send(null);
 }
 
+function stringToTime(timeString) {
+	var split = timeString.split(":");
+	var hours = parseInt(split[0]);
+	var minutes = parseInt(split[1]) / 60;
+	return hours + minutes;
+}
+
+
 /** Load spreadsheet **/
 
 function LoadSpread(json) {
@@ -70,13 +78,15 @@ function LoadSpread(json) {
     const voedingsadviesTussendoorAvond = json.sheets[achternaam].data.dataTable[16][2].value;
 
     /** Variables for notification time **/
-    const tijdVoorOntbijt = json.sheets[achternaam].data.dataTable[10][1].value;
-    const tijdOntbijt = json.sheets[achternaam].data.dataTable[11][1].value;
-    const tijdTussendoorOchtend = json.sheets[achternaam].data.dataTable[12][1].value;
-    const tijdLunch = json.sheets[achternaam].data.dataTable[13][1].value;
-    const tijdTussendoorMiddag = json.sheets[achternaam].data.dataTable[14][1].value;
-    const tijdAvondeten = json.sheets[achternaam].data.dataTable[15][1].value;
-    const tijdTussendoorAvond = json.sheets[achternaam].data.dataTable[16][1].value;
+	/** changed so it makes a number of the time **/
+    const tijdVoorOntbijt = stringToTime(json.sheets[achternaam].data.dataTable[10][1].value);
+    const tijdOntbijt = stringToTime(json.sheets[achternaam].data.dataTable[11][1].value);
+    const tijdTussendoorOchtend = stringToTime(json.sheets[achternaam].data.dataTable[12][1].value);
+    const tijdLunch = stringToTime(json.sheets[achternaam].data.dataTable[13][1].value);
+    const tijdTussendoorMiddag = stringToTime(json.sheets[achternaam].data.dataTable[14][1].value);
+    const tijdAvondeten = stringToTime(json.sheets[achternaam].data.dataTable[15][1].value);
+    const tijdTussendoorAvond = stringToTime(json.sheets[achternaam].data.dataTable[16][1].value);
+	
 
     /** The text content of the items in index.html **/
     document.getElementById("inputVoorOntbijt").textContent = voedingsadviesVoorOntbijt;
@@ -96,31 +106,31 @@ function LoadSpread(json) {
 	//The action after confirming that you've taken something 
 	//This is dependent on the current time
     $('#notification .nu-btn').click(function(){
-        if (currentTime == tijdVoorOntbijt ){
+        if (currentTime >= tijdVoorOntbijt && currentTime < tijdOntbijt){
             $('#voorOntbijt input[type=checkbox]').prop('checked',true);
             voorOntbijtGegeten = true;
 			cookieAdvices(14, 0);
-        } else if (currentTime == tijdOntbijt){
+        } else if (currentTime >= tijdOntbijt && currentTime < tijdTussendoorOchtend){
             $('#ontbijt input[type=checkbox]').prop('checked',true);
             ontbijtGegeten = true;
 			cookieAdvices(14, 1);
-        } else if (currentTime == tijdTussendoorOchtend){
+        } else if (currentTime >= tijdTussendoorOchtend && currentTime < tijdLunch){
             $('#tussendoorOchtend input[type=checkbox]').prop('checked',true);
             tussendoorOchtendGegeten = true;
 			cookieAdvices(14, 2);
-        } else if (currentTime == tijdLunch){
+        } else if (currentTime >= tijdLunch && currentTime < tijdTussendoorMiddag){
             $('#lunch input[type=checkbox]').prop('checked',true);
             lunchGegeten = true;
 			cookieAdvices(14, 3);
-        } else if (currentTime == tijdTussendoorMiddag){
+        } else if (currentTime >= tijdTussendoorMiddag && currentTime < tijdAvondeten){
             $('#tussendoorMiddag input[type=checkbox]').prop('checked',true);
             tussendoorMiddagGegeten = true;
 			cookieAdvices(14, 4);
-        } else if (currentTime == tijdAvondeten){
+        } else if (currentTime >= tijdAvondeten && currentTime < tijdTussendoorAvond){
             $('#avondeten input[type=checkbox]').prop('checked',true);
             avondetenGegeten = true;
 			cookieAdvices(14, 5);
-        } else if (currentTime == tijdTussendoorAvond){
+        } else if (currentTime >= tijdTussendoorAvond && currentTime < tijdVoorOntbijt){
             $('#tussendoorAvond input[type=checkbox]').prop('checked',true);
             tussendoorAvondGegeten = true;
 			cookieAdvices(14, 6);
@@ -133,25 +143,26 @@ function LoadSpread(json) {
 	//Action when you choose 'other' option
     $('#notification .anders-btn').click(function(){
         herinnering = false;
-        if (currentTime == tijdVoorOntbijt){
-            ietsandersVoorOntbijt = true;
+        if (currentTime >= tijdVoorOntbijt && currentTime < tijdOntbijt){
+            $('#ietsandersVoorOntbijt input[type=checkbox]').prop('checked',true);
+			ietsandersVoorOntbijt = true;
 			cookieAdvices(14, 7);
-        } else if (currentTime == tijdOntbijt){
+        } else if (currentTime >= tijdOntbijt && currentTime < tijdTussendoorOchtend){
             ietsandersOntbijt = true;
 			cookieAdvices(14, 8);
-        } else if (currentTime == tijdTussendoorOchtend){
+        } else if (currentTime >= tijdTussendoorOchtend && currentTime < tijdLunch){
             ietsandersTussendoorOchtend = true;
 			cookieAdvices(14, 9);
-        } else if (currentTime == tijdLunch){
+        } else if (currentTime >= tijdLunch && currentTime < tijdTussendoorMiddag){
             ietsandersLunch = true;
 			cookieAdvices(14, 10);
-        } else if (currentTime == tijdTussendoorMiddag){
+        } else if (currentTime >= tijdTussendoorMiddag && currentTime < tijdAvondeten){
             ietsandersTussendoorMiddag = true;
 			cookieAdvices(14, 11);
-        } else if (currentTime == tijdAvondeten){
+        } else if (currentTime >= tijdAvondeten && currentTime < tijdTussendoorAvond){
             ietsandersAvond = true;
 			cookieAdvices(14, 12);
-        } else if (currentTime == tijdTussendoorAvond){
+        } else if (currentTime >= tijdTussendoorAvond && currentTime < tijdVoorOntbijt){
             ietsandersTussendoorAvond = true;
 			cookieAdvices(14, 13);
         }
@@ -161,31 +172,31 @@ function LoadSpread(json) {
 	//Happens if you confirm/later/other the reminder
     $('#reminder .nu-btn').click(function(){
         herinnering = false;
-        if (currentTime == tijdVoorOntbijt){
+        if (currentTime >= tijdVoorOntbijt && currentTime < tijdOntbijt){
             $('#voorOntbijt input[type=checkbox]').prop('checked',true);
             voorOntbijtGegeten = true;
 			cookieAdvices(14, 0);
-        } else if (currentTime == tijdOntbijt){
+        } else if (currentTime >= tijdOntbijt && currentTime < tijdTussendoorOchtend){
             $('#ontbijt input[type=checkbox]').prop('checked',true);
             ontbijtGegeten = true;
 			cookieAdvices(14, 1);
-        } else if (currentTime == tijdTussendoorOchtend){
+        } else if (currentTime >= tijdTussendoorOchtend && currentTime < tijdLunch){
             $('#tussendoorMiddag input[type=checkbox]').prop('checked',true);
             tussendoorOchtendGegeten = true;
 			cookieAdvices(14, 2);
-        } else if (currentTime == tijdLunch){
+        } else if (currentTime >= tijdLunch && currentTime < tijdTussendoorMiddag){
             $('#lunch input[type=checkbox]').prop('checked',true);
             lunchGegeten = true;
 			cookieAdvices(14, 3);
-        } else if (currentTime == tijdTussendoorMiddag){
+        } else if (currentTime >= tijdTussendoorMiddag && currentTime < tijdAvondeten){
             $('#tussendoorMiddag input[type=checkbox]').prop('checked',true);
             tussendoorMiddagGegeten = true;
 			cookieAdvices(14, 4);
-        } else if (currentTime == tijdAvondeten){
+        } else if (currentTime >= tijdAvondeten && currentTime < tijdTussendoorAvond){
             $('#avondeten input[type=checkbox]').prop('checked',true);
             avondetenGegeten = true;
 			cookieAdvices(14, 5);
-        } else if (currentTime == tijdTussendoorAvond){
+        } else if (currentTime >= tijdTussendoorAvond && currentTime < tijdVoorOntbijt){
             $('#tussendoorAvond input[type=checkbox]').prop('checked',true);
             tussendoorAvondGegeten = true;
 			cookieAdvices(14, 6);
@@ -197,25 +208,25 @@ function LoadSpread(json) {
     });
     $('#reminder .anders-btn').click(function(){
         herinnering = false;
-        if (currentTime == tijdVoorOntbijt){
+        if (currentTime >= tijdVoorOntbijt && currentTime < tijdOntbijt){
             ietsandersVoorOntbijt = true;
 			cookieAdvices(14, 7);
-        } else if (currentTime == tijdOntbijt){
+        } else if (currentTime >= tijdOntbijt && currentTime < tijdTussendoorOchtend){
             ietsandersOntbijt = true;
 			cookieAdvices(14, 8);
-        } else if (currentTime == tijdTussendoorOchtend){
+        } else if (currentTime >= tijdTussendoorOchtend && currentTime < tijdLunch){
             ietsandersTussendoorOchtend = true;
 			cookieAdvices(14, 9);
-        } else if (currentTime == tijdLunch){
+        } else if (currentTime >= tijdLunch && currentTime < tijdTussendoorMiddag){
             ietsandersLunch = true;
 			cookieAdvices(14, 10);
-        } else if (currentTime == tijdTussendoorMiddag){
+        } else if (currentTime >= tijdTussendoorMiddag && currentTime < tijdAvondeten){
             ietsandersTussendoorMiddag = true;
 			cookieAdvices(14, 11);
-        } else if (currentTime == tijdAvondeten){
+        } else if (currentTime >= tijdAvondeten && currentTime < tijdTussendoorAvond){
             ietsandersAvond = true;
 			cookieAdvices(14, 12);
-        } else if (currentTime == tijdTussendoorAvond){
+        } else if (currentTime >= tijdTussendoorAvond && currentTime < tijdVoorOntbijt){
             ietsandersTussendoorAvond = true;
 			cookieAdvices(14, 13);
         }
@@ -249,8 +260,8 @@ function LoadSpread(json) {
 
     /** Defining what the current time is **/
     const now = new Date();
-        let currentTime = now.getHours() + ":" + now.getMinutes();
-        currentTime = tijdOntbijt;  //this line is commented out so the current computer time is used instead of the breakfast time
+        let currentTime = stringToTime(now.getHours() + ":" + now.getMinutes());
+        currentTime = stringToTime("7:05");  //this line is commented out so the current computer time is used instead of the breakfast time
         //console.log(currentTime);
 
     /** Function to show the right window according to the time **/
@@ -406,7 +417,7 @@ function LoadSpread(json) {
             if(voorOntbijtGegeten == true || herinnering == true || ietsandersVoorOntbijt == true){
                 return;
             }
-            if (currentTime == tijdVoorOntbijt) {
+            if (currentTime >= tijdVoorOntbijt && currentTime < tijdOntbijt) {
                 notVoorOntbijt();
             }
         }
@@ -415,7 +426,7 @@ function LoadSpread(json) {
             if(ontbijtGegeten == true || herinnering == true || ietsandersOntbijt == true){
                 return;
             }
-            if (currentTime == tijdOntbijt) {
+            if (currentTime >= tijdOntbijt && currentTime < tijdTussendoorOchtend) {
                 notOntbijt();
             }
         }
@@ -424,8 +435,8 @@ function LoadSpread(json) {
             if(tussendoorOchtendGegeten == true || herinnering == true || ietsandersTussendoorOchtend == true){
                 return;
             }
-            if (currentTime == tijdTussendoorOchtend) {
-                notTussendoorochtend();
+            if (currentTime >= tijdTussendoorOchtend && currentTime < tijdLunch) {
+                notTussendoorOchtend();
             }
         }
 
@@ -433,7 +444,7 @@ function LoadSpread(json) {
             if(lunchGegeten == true || herinnering == true || ietsandersLunch == true){
                 return;
             }
-            if (currentTime == tijdLunch) {
+            if (currentTime >= tijdLunch && currentTime < tijdTussendoorMiddag) {
                 notLunch();
             }
         }
@@ -442,7 +453,7 @@ function LoadSpread(json) {
             if(tussendoorMiddagGegeten == true || herinnering == true || ietsandersTussendoorMiddag == true){
                 return;
             }
-            if (currentTime == tijdTussendoorMiddag) {
+            if (currentTime >= tijdTussendoorMiddag && currentTime < tijdAvondeten) {
                 notTussendoorMiddag();
             }
         }
@@ -452,7 +463,7 @@ function LoadSpread(json) {
             if(avondetenGegeten == true || herinnering == true || ietsandersAvond == true){
                 return;
             }
-            if (currentTime == tijdAvondeten) {
+            if (currentTime >= tijdAvondeten && currentTime < tijdTussendoorAvond) {
                 notAvondeten();
             }
         }
@@ -461,7 +472,7 @@ function LoadSpread(json) {
             if(tussendoorAvondGegeten == true || herinnering == true || ietsandersTussendoorAvond == true){
                 return;
             }
-            if (currentTime == tijdTussendoorAvond) {
+            if (currentTime >= tijdTussendoorAvond && currentTime < tijdVoorOntbijt) {
                 notTussendoorAvond();
             }
         }
