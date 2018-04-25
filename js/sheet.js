@@ -130,7 +130,7 @@ function LoadSpread(json) {
             $('#avondeten input[type=checkbox]').prop('checked',true);
             avondetenGegeten = true;
 			cookieAdvices(14, 5);
-        } else if (currentTime >= tijdTussendoorAvond && currentTime < tijdVoorOntbijt){
+        } else if (currentTime >= tijdTussendoorAvond){
             $('#tussendoorAvond input[type=checkbox]').prop('checked',true);
             tussendoorAvondGegeten = true;
 			cookieAdvices(14, 6);
@@ -162,7 +162,7 @@ function LoadSpread(json) {
         } else if (currentTime >= tijdAvondeten && currentTime < tijdTussendoorAvond){
             ietsandersAvond = true;
 			cookieAdvices(14, 12);
-        } else if (currentTime >= tijdTussendoorAvond && currentTime < tijdVoorOntbijt){
+        } else if (currentTime >= tijdTussendoorAvond){
             ietsandersTussendoorAvond = true;
 			cookieAdvices(14, 13);
         }
@@ -261,7 +261,7 @@ function LoadSpread(json) {
     /** Defining what the current time is **/
     const now = new Date();
         let currentTime = stringToTime(now.getHours() + ":" + now.getMinutes());
-        currentTime = stringToTime("7:05");  //this line is commented out so the current computer time is used instead of the breakfast time
+        currentTime = stringToTime("8:05");  //this line is commented out so the current computer time is used instead of the breakfast time
         //console.log(currentTime);
 
     /** Function to show the right window according to the time **/
@@ -472,7 +472,7 @@ function LoadSpread(json) {
             if(tussendoorAvondGegeten == true || herinnering == true || ietsandersTussendoorAvond == true){
                 return;
             }
-            if (currentTime >= tijdTussendoorAvond && currentTime < tijdVoorOntbijt) {
+            if (currentTime >= tijdTussendoorAvond) {
                 notTussendoorAvond();
             }
         }
