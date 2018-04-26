@@ -1,0 +1,522 @@
+<html>
+  <head>
+    <title>
+      PROMISS Interface
+    </title>
+	
+	<meta http-equiv="refresh" content="60" />
+
+    <!-- Spread.Sheets script for Excel -->
+    <script src="http://code.jquery.com/jquery-2.1.3.min.js" type="text/javascript"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js" type="text/javascript"></script>
+
+    <link href="http://cdn.grapecity.com/spreadjs/hosted/css/gc.spread.sheets.excel2013white.10.1.0.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="http://cdn.grapecity.com/spreadjs/hosted/scripts/gc.spread.sheets.all.10.1.0.min.js"></script>
+    <script type="text/javascript" src="http://cdn.grapecity.com/spreadjs/hosted/scripts/interop/gc.spread.excelio.10.1.0.min.js"></script>
+    
+    <script type="text/javascript" src="js/sheet.js"></script>
+
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- Owl Carousel 2 -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.3/assets/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.3/assets/owl.theme.default.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.3/owl.carousel.js"></script>
+
+    <!-- Custom style sheet -->
+    <link rel="stylesheet" type="text/css" href="style/style.css">
+
+    <!-- Font Awesome -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+  </head>
+
+
+  <body data-spy="scroll" data-target="#navbar-voedingsadvies" data-offset="0">
+
+    <!-- Toolbar -->
+    <nav class="toolbar navbar navbar-expand-sm navbar-light bg-light fixed-top">
+      <div class="mr-auto">
+        <a href="#" class="menu-btn btn btn-outline-secondary" id="menu-toggle">
+          <i class="fas fa-bars fa-lg"></i> Menu
+        </a>
+      </div>
+      <div class="mx-auto">
+        <a href="#"><img src="images/logo_promiss.png" height="40px"></a>
+      </div>
+      <div class="ml-auto">
+        <a href="#" class="help-btn btn btn-outline-secondary">
+          <i class="far fa-question-circle fa-lg"></i> Help
+        </a>
+      </div>
+    </nav> 
+
+    <!-- Wrapper for sidebar and page content -->
+    <div id="wrapper">
+
+      <!-- Sidebar -->
+      <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li><a href="#"><i class="fas fa-home fa-lg fa-fw"></i><span>Startpagina</span></a></li>
+          <li><a href="#"><i class="fas fa-utensils fa-lg fa-fw"></i><span>Voedingsadvies</span></a></li>
+          <li><a href="#"><i class="fas fa-bicycle fa-lg fa-fw"></i><span>Beweegadvies</span></a></li>
+          <li><a href="#"><i class="fas fa-heartbeat fa-lg fa-fw"></i><span>Hoe staat u ervoor?</span></a></li>
+        </ul>
+      </div>
+
+      <!-- Page content -->
+      <div id="page-content-wrapper">       
+       
+        <div id="page-content-nav" class="container-fluid sticky-top">
+          <div class="row">
+            <div  class="col-sm-12">
+              <nav id="navbar-voedingsadvies" class="nav nav-pills nav-justified">
+                <a class="nav-item nav-link" href="#ochtend" id="ochtenddeel">Ochtend
+                </a>    
+                <a class="nav-item nav-link" href="#middag" id="middagdeel">Middag
+                </a> 
+                <a class="nav-item nav-link" href="#avond" id="avonddeel">Avond
+                </a>    
+              </nav>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page content container -->
+        <div id="page-content" class="container-fluid">
+          <div class='row'>
+            <div class="col-sm-12">
+
+              <!-- Ochtend -->
+              <div id="ochtend" class="container-fluid ochtenddeel"> 
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+
+                <div class="row">
+                  <div class="col-sm-12">
+                  <h2  class="text-center">Vink af wat u vanmorgen hebt gegeten en gedronken.</h2>
+                  <br />
+                  </div>
+                </div>  
+
+                <div class="row">
+                  <div class="col-sm-5">
+                    <h3>V&oacute;&oacute;r ontbijt:</h3>
+                  </div>
+                </div>
+                <div id="voorOntbijt" class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-5">
+                      <h4 id="inputVoorOntbijt"></h4> </br>
+					  
+                    </div> 
+                    <div class="col-sm-4">
+                      <img src="images/GlassOfMilk.png" width="30%">
+                    </div>
+                    <div class="col-sm-2">
+                      <label class="container">
+                        <h4><input type="checkbox" class="big-checkbox" name="voorOntbijt" id="voorOntbijtCheck"> </h4> 
+                      </label>
+                    </div>
+                </div>
+				<div id="ietsandersVoorOntbijt" class="row" style="display: none">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-5">
+                      <h4>Vervangende maaltijd</h4> </br>
+					  
+                    </div> 
+                    <div class="col-sm-4">
+                      <!-- <img src="images/GlassOfMilk.png" width="30%"> -->
+                    </div>
+                    <div class="col-sm-2">
+                      <label class="container">
+                        <h4><input type="checkbox" class="big-checkbox" name="ietsandersVoorOntbijt" id="ietsAndersVoorOntbijtCheck"> </h4> 
+                      </label>
+                    </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-5">
+                    <h3>Ontbijt:</h3>
+                  </div>
+                </div>
+                <div id="ontbijt" class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-5">
+                      <h4 id="inputOntbijt"></h4>
+                    </div> 
+                    <div class="col-sm-4">
+                      <img src="images/GlassOfMilk.png" width="30%">
+                    </div>
+                    <div class="col-sm-2">
+                      <label class="container">
+                        <input type="checkbox" class="big-checkbox" name="ontbijt" id="ontbijtCheck">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                </div>
+				
+				<div id="ietsandersOntbijt" class="row" style="display: none">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-5">
+                      <h4>Vervangende maaltijd</h4>
+                    </div> 
+                    <div class="col-sm-4">
+                      
+                    </div>
+                    <div class="col-sm-2">
+                      <label class="container">
+                        <input type="checkbox" class="big-checkbox" name="ietsAndersOntbijt" id="ietsandersOntbijtCheck">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-5">
+                    <h3>Ochtend tussendoor:</h3>
+                  </div>
+                </div>
+                <div id="tussendoorOchtend" class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-5">
+                      <h4 id="inputTussendoorOchtend"></h4>
+                    </div> 
+                    <div class="col-sm-4">
+                      <img src="images/GlassOfMilk.png" width="30%">
+                    </div>
+                    <div class="col-sm-2">
+                      <label class="container">
+                        <input type="checkbox" class="big-checkbox" name="tussendoorOchtend" id="tussendoorOchtendCheck">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                </div>  
+				
+				<div id="ietsandersTussendoorOchtend" class="row" style="display: none">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-5">
+                      <h4>Vervangende maaltijd</h4>
+                    </div> 
+                    <div class="col-sm-4">
+                      
+                    </div>
+                    <div class="col-sm-2">
+                      <label class="container">
+                        <input type="checkbox" class="big-checkbox" name="ietsAndersTussendoorOchtend" id="ietsandersTussendoorOchtendCheck">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                </div>
+
+              </div> <!-- end ochtend --> 
+            
+              <!-- Middag -->
+              <div id="middag" class="container-fluid middagdeel">
+                <br />
+                <br />
+                <br />  
+                <br />
+                <br />
+
+                <div class="row">
+                  <div  class="col-sm-12">
+                  <h2  class="text-center">Vink af wat u vanmiddag hebt gegeten en gedronken.</h2>
+                  <br />
+                  </div>
+                </div> 
+
+                <div class="row">
+                  <div class="col-sm-5">
+                    <h3>Lunch:</h3>
+                  </div>
+                </div>
+                <div id="lunch" class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-5">
+                      <h4 id="inputLunch"></h4>
+                    </div> 
+                    <div class="col-sm-4">
+                      <img src="images/GlassOfMilk.png" width="30%">
+                    </div>
+                    <div class="col-sm-2">
+                      <label class="container">
+                        <input type="checkbox" class="big-checkbox" name="lunch" id="lunchCheck">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                </div>  
+				<div id="ietsandersLunch" class="row" style="display: none">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-5">
+                      <h4>Vervangende maaltijd</h4>
+                    </div> 
+                    <div class="col-sm-4">
+                      
+                    </div>
+                    <div class="col-sm-2">
+                      <label class="container">
+                        <input type="checkbox" class="big-checkbox" name="ietsAndersLunch" id="ietsandersLunchCheck">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-5">
+                    <h3>Middag tussendoor:</h3>
+                  </div>
+                </div>
+                <div id="tussendoorMiddag" class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-5">
+                      <h4 id="inputTussendoorMiddag"></h4>
+                    </div> 
+                    <div class="col-sm-4">
+                      <img src="images/GlassOfMilk.png" width="30%">
+                    </div>
+                    <div class="col-sm-2">
+                      <label class="container">
+                        <input type="checkbox" class="big-checkbox" name="tussendoorMiddag" id="tussendoorMiddagCheck">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                </div> 
+				<div id="ietsandersTussendoorMiddag" class="row" style="display: none">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-5">
+                      <h4>Vervangende maaltijd</h4>
+                    </div> 
+                    <div class="col-sm-4">
+                      
+                    </div>
+                    <div class="col-sm-2">
+                      <label class="container">
+                        <input type="checkbox" class="big-checkbox" name="ietsAndersTussendoorMiddag" id="ietsandersTussendoorMiddagCheck">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                </div>
+
+              </div> <!-- end middag -->
+                
+              <!-- Avond -->
+              <div id="avond" class="container-fluid"> 
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+
+                <div class="row">
+                  <div  class="col-sm-12">
+                  <h2  class="text-center">Vink af wat u vanavond hebt gegeten en gedronken.</h2>
+                  <br />
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-5">
+                    <h3>Avondeten:</h3>
+                  </div>
+                </div>
+                <div id="avondeten" class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-5">
+                      <h4 id="inputAvondeten"></h4>
+                    </div> 
+                    <div class="col-sm-4">
+                      <img src="images/GlassOfMilk.png" width="30%">
+                    </div>
+                    <div class="col-sm-2">
+                      <label class="container">
+                        <input type="checkbox" class="big-checkbox" name="avondeten" id="avondetenCheck">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                </div>  
+				<div id="ietsandersAvond" class="row" style="display: none">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-5">
+                      <h4>Vervangende maaltijd</h4>
+                    </div> 
+                    <div class="col-sm-4">
+                      
+                    </div>
+                    <div class="col-sm-2">
+                      <label class="container">
+                        <input type="checkbox" class="big-checkbox" name="ietsAndersAvond" id="ietsandersAvondCheck">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-5">
+                    <h3>Avond tussendoor:</h3>
+                  </div>
+                </div>
+                <div id="tussendoorAvond" class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-5">
+                      <h4 id="inputTussendoorAvond"></h4>
+                    </div> 
+                    <div class="col-sm-4">
+                      <img src="images/GlassOfMilk.png" width="30%">
+                    </div>
+                    <div class="col-sm-2">
+                      <label class="container">
+                        <input type="checkbox" class="big-checkbox" name="tussendoorAvond" id="tussendoorAvondCheck">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                </div> 
+				<div id="ietsandersTussendoorAvond" class="row" style="display: none">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-5">
+                      <h4>Vervangende maaltijd</h4>
+                    </div> 
+                    <div class="col-sm-4">
+                      
+                    </div>
+                    <div class="col-sm-2">
+                      <label class="container">
+                        <input type="checkbox" class="big-checkbox" name="ietsAndersTussendoorAvond" id="ietsandersTussendoorAvondCheck">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                </div>
+                <br />
+                <br />
+                <br />
+
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+
+              </div> <!-- end avond -->              
+
+            </div> <!-- end col-sm-12 in page content container-->
+          </div> <!-- end row in page content container -->
+        </div> <!-- end page content container-->
+
+        <!-- Notification modal -->        
+        <div class="modal fade container-fluid" id="notification" tabindex="-1" role="dialog" aria-labelledby="notificatie" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Bericht</h5>
+              </div>
+              <div id="notification-content" class="modal-body">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="nu-btn btn btn-primary" data-dismiss="modal">Ik neem het nu</button>
+                <button type="button" class="later-btn btn btn-secondary" data-dismiss="modal">Ik neem het later</button>
+                <button type="button" class="anders-btn btn btn-secondary" data-dismiss="modal">Ik neem iets anders</button>
+              </div>
+            </div>
+          </div>
+        </div>        
+
+        <!-- Reminder modal -->      
+        <div class="modal fade container-fluid" id="reminder" tabindex="-1" role="dialog" aria-labelledby="reminder" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Herinnering</h5>
+              </div>
+              <div id="reminder-content" class="modal-body">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="nu-btn btn btn-primary" data-dismiss="modal">Ik neem het nu</button>
+                <button type="button" class="later-btn btn btn-secondary" data-dismiss="modal">Ik neem het later</button>
+                <button type="button" class="anders-btn btn btn-secondary" data-dismiss="modal">Ik neem iets anders</button>
+              </div>
+            </div>
+          </div>
+        </div>
+           
+        <!-- Slider for extra dietary options -->
+        <div class="container-fluid" id="slider">
+          <div class="row">
+            <div class="col-sm-12 text-center slider-uitleg">
+              <h5>Heeft u nog andere producten genuttigd? Selecteer hieronder wat u extra hebt genomen.</h5>
+            </div>
+          </div>
+          <div class="row ">
+            <div  class="col-sm-12 mx-auto sliderWrap"> 
+              <div class="owl-carousel owl-theme">
+                <button type="button" class="card-btn btn img-fluid" onclick="clickExtraItem1()"><img src="images/milk.png" class="card-img-top"><span class="badge badge-pill badge-dark position" id="extraItem1"></span></button>                
+                <button type="button" class="card-btn btn img-fluid" onclick="clickExtraItem2()"><img src="images/cheese.png" class="card-img-top"><span class="badge badge-pill badge-dark position" id="extraItem2"></span></button>    
+                <button type="button" class="card-btn btn img-fluid" onclick="clickExtraItem3()"><img src="images/fish.png" class="card-img-top"><span class="badge badge-pill badge-dark position" id="extraItem3"></span></button> 
+                <button type="button" class="card-btn btn img-fluid" onclick="clickExtraItem4()"><img src="images/egg.png" class="card-img-top"><span class="badge badge-pill badge-dark position" id="extraItem4"></span></button>          
+                <button type="button" class="card-btn btn img-fluid" onclick="clickExtraItem5()"><img src="images/steak.png" class="card-img-top"><span class="badge badge-pill badge-dark position" id="extraItem5"></span></button>                
+                <button type="button" class="card-btn btn img-fluid" onclick="clickExtraItem6()"><img src="images/peanut.png" class="card-img-top"><span class="badge badge-pill badge-dark position" id="extraItem6"></span></button>
+                <button type="button" class="card-btn btn img-fluid" onclick="clickExtraItem7()"><img src="images/apple.png" class="card-img-top"><span class="badge badge-pill badge-dark position" id="extraItem7"></span></button>
+                <button type="button" class="card-btn btn img-fluid" onclick="clickExtraItem8()"><img src="images/croissant.png" class="card-img-top"><span class="badge badge-pill badge-dark position" id="extraItem8"></span></button>
+                <button type="button" class="card-btn btn img-fluid" onclick="clickExtraItem9()"><img src="images/vegetables.png" class="card-img-top"><span class="badge badge-pill badge-dark position" id="extraItem9"></span></button>
+                <button type="button" class="card-btn btn img-fluid" onclick="clickExtraItem10()"><img src="images/bananas.png" class="card-img-top"><span class="badge badge-pill badge-dark position" id="extraItem10"></span></button>                
+                <button type="button" class="card-btn btn img-fluid" onclick="clickExtraItem11()"><img src="images/broccoli.png" class="card-img-top"><span class="badge badge-pill badge-dark position" id="extraItem11"></span></button>                
+                <button type="button" class="card-btn btn img-fluid" onclick="clickExtraItem12()"><img src="images/potato.png" class="card-img-top"><span class="badge badge-pill badge-dark position" id="extraItem12"></span></button>     
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div> <!-- end page-content-wrapper -->
+
+    </div> <!-- end wrapper --> 
+
+
+    <!-- Scrollspy navigation script -->
+    <script type="text/javascript">
+      $('body').scrollspy({ target: '#navbar-voedingsadvies' });
+    </script>
+    <script>
+      $('[data-spy="scroll"]').each(function () {
+        var $spy = $(this).scrollspy('refresh')
+      })
+    </script>
+
+    <!-- Menu toggle script --> 
+    <script type="text/javascript">
+      $('#menu-toggle').click(function (e){
+        e.preventDefault();
+        $('#wrapper').toggleClass('menuDisplayed');
+      });
+    </script>   
+
+    <!-- Extra dietary options carousel slider script -->
+    <script type="text/javascript">
+      $('.owl-carousel').owlCarousel({
+          loop:false,
+          margin:10,
+          stagePadding:30,
+          nav:true,
+          navText: ['<i class="fa fa-chevron-circle-left fa-lg" aria-hidden="true"></i>','<i class="fa fa-chevron-circle-right fa-lg" aria-hidden="true"></i>'],
+          dots: false,
+          autoplay: false,
+          responsive:{
+              0:{
+                  items:3
+              },
+              600:{
+                  items:5
+              },
+              1000:{
+                  items:7
+              }
+          }
+      })
+    </script>
+    
+  </body>
+
+</html>
