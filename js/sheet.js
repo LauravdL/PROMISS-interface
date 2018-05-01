@@ -145,24 +145,37 @@ function LoadSpread(json) {
         herinnering = false;
         if (currentTime >= tijdVoorOntbijt && currentTime < tijdOntbijt){
             $('#ietsandersVoorOntbijt input[type=checkbox]').prop('checked',true);
+			document.getElementById('ietsandersVoorOntbijt').style.display = 'flex';
 			ietsandersVoorOntbijt = true;
 			cookieAdvices(14, 7);
         } else if (currentTime >= tijdOntbijt && currentTime < tijdTussendoorOchtend){
+			$('#ietsandersOntbijt input[type=checkbox]').prop('checked',true);
+			document.getElementById('ietsandersOntbijt').style.display = 'flex';
             ietsandersOntbijt = true;
 			cookieAdvices(14, 8);
         } else if (currentTime >= tijdTussendoorOchtend && currentTime < tijdLunch){
             ietsandersTussendoorOchtend = true;
+			$('#ietsandersTussendoorOchtend input[type=checkbox]').prop('checked',true);
+			document.getElementById('ietsandersTussendoorOchtend').style.display = 'flex';
 			cookieAdvices(14, 9);
         } else if (currentTime >= tijdLunch && currentTime < tijdTussendoorMiddag){
+			$('#ietsandersLunch input[type=checkbox]').prop('checked',true);
             ietsandersLunch = true;
+			document.getElementById('ietsandersLunch').style.display = 'flex';
 			cookieAdvices(14, 10);
         } else if (currentTime >= tijdTussendoorMiddag && currentTime < tijdAvondeten){
+			document.getElementById('ietsandersTussendoorMiddag').style.display = 'flex';
+			$('#ietsandersTussendoorMiddag input[type=checkbox]').prop('checked',true);
             ietsandersTussendoorMiddag = true;
 			cookieAdvices(14, 11);
         } else if (currentTime >= tijdAvondeten && currentTime < tijdTussendoorAvond){
+			$('#ietsandersAvond input[type=checkbox]').prop('checked',true);
+			document.getElementById('ietsandersAvond').style.display = 'flex';
             ietsandersAvond = true;
 			cookieAdvices(14, 12);
         } else if (currentTime >= tijdTussendoorAvond){
+			$('#ietsandersTussendoorAvond input[type=checkbox]').prop('checked',true);
+			document.getElementById('ietsandersTussendoorAvond').style.display = 'flex';
             ietsandersTussendoorAvond = true;
 			cookieAdvices(14, 13);
         }
@@ -196,7 +209,7 @@ function LoadSpread(json) {
             $('#avondeten input[type=checkbox]').prop('checked',true);
             avondetenGegeten = true;
 			cookieAdvices(14, 5);
-        } else if (currentTime >= tijdTussendoorAvond && currentTime < tijdVoorOntbijt){
+        } else if (currentTime >= tijdTussendoorAvond){
             $('#tussendoorAvond input[type=checkbox]').prop('checked',true);
             tussendoorAvondGegeten = true;
 			cookieAdvices(14, 6);
@@ -209,24 +222,38 @@ function LoadSpread(json) {
     $('#reminder .anders-btn').click(function(){
         herinnering = false;
         if (currentTime >= tijdVoorOntbijt && currentTime < tijdOntbijt){
-            ietsandersVoorOntbijt = true;
+            $('#ietsandersVoorOntbijt input[type=checkbox]').prop('checked',true);
+			document.getElementById('ietsandersVoorOntbijt').style.display = 'flex';
+			ietsandersVoorOntbijt = true;
 			cookieAdvices(14, 7);
         } else if (currentTime >= tijdOntbijt && currentTime < tijdTussendoorOchtend){
+			$('#ietsandersOntbijt input[type=checkbox]').prop('checked',true);
+			document.getElementById('ietsandersOntbijt').style.display = 'flex';
             ietsandersOntbijt = true;
 			cookieAdvices(14, 8);
         } else if (currentTime >= tijdTussendoorOchtend && currentTime < tijdLunch){
             ietsandersTussendoorOchtend = true;
+			$('#ietsandersTussendoorOchtend input[type=checkbox]').prop('checked',true);
+			document.getElementById('ietsandersTussendoorOchtend').style.display = 'flex';
 			cookieAdvices(14, 9);
         } else if (currentTime >= tijdLunch && currentTime < tijdTussendoorMiddag){
+			$('#ietsandersLunch input[type=checkbox]').prop('checked',true);
             ietsandersLunch = true;
+			document.getElementById('ietsandersLunch').style.display = 'flex';
 			cookieAdvices(14, 10);
         } else if (currentTime >= tijdTussendoorMiddag && currentTime < tijdAvondeten){
+			document.getElementById('ietsandersTussendoorMiddag').style.display = 'flex';
+			$('#ietsandersTussendoorMiddag input[type=checkbox]').prop('checked',true);
             ietsandersTussendoorMiddag = true;
 			cookieAdvices(14, 11);
         } else if (currentTime >= tijdAvondeten && currentTime < tijdTussendoorAvond){
+			$('#ietsandersAvond input[type=checkbox]').prop('checked',true);
+			document.getElementById('ietsandersAvond').style.display = 'flex';
             ietsandersAvond = true;
 			cookieAdvices(14, 12);
-        } else if (currentTime >= tijdTussendoorAvond && currentTime < tijdVoorOntbijt){
+        } else if (currentTime >= tijdTussendoorAvond){
+			$('#ietsandersTussendoorAvond input[type=checkbox]').prop('checked',true);
+			document.getElementById('ietsandersTussendoorAvond').style.display = 'flex';
             ietsandersTussendoorAvond = true;
 			cookieAdvices(14, 13);
         }
@@ -261,26 +288,26 @@ function LoadSpread(json) {
     /** Defining what the current time is **/
     const now = new Date();
         let currentTime = stringToTime(now.getHours() + ":" + now.getMinutes());
-        currentTime = stringToTime("8:05");  //this line is commented out so the current computer time is used instead of the breakfast time
+        currentTime = stringToTime("19:05");  //this line is commented out so the current computer time is used instead of the breakfast time
         //console.log(currentTime);
 
     /** Function to show the right window according to the time **/
     function showochtend(){
-        if (currentTime < "12:00"){
+        if (currentTime < stringToTime("12:00")){
             window.onbeforeunload = function () {
               window.scrollTo(0,0);
             };
         }
     }        
     function showmiddag(){
-        if (currentTime >= "12:00" && currentTime < "18:00"){
+        if (currentTime >= stringToTime("12:00") && currentTime < stringToTime("18:00")){
             window.onbeforeunload = function () {
               window.scrollTo(0,560);
             };
         }
     }    
     function showavond(){
-        if (currentTime >= "18:00"){
+        if (currentTime >= stringToTime("18:00")){
             window.onbeforeunload = function () {
               window.scrollTo(0,1000);
             };
@@ -481,7 +508,7 @@ function LoadSpread(json) {
         /** Reminder functions **/
 
         const herinneringVoorOntbijt = () => {
-            if(tijdTotHerinnering == 0 && currentTime == tijdVoorOntbijt){
+            if(tijdTotHerinnering == 0 && currentTime >= tijdVoorOntbijt && currentTime < tijdOntbijt){
                 //Show reminder
                 $('#reminder').modal({
                         show: true,
@@ -494,7 +521,7 @@ function LoadSpread(json) {
         }
 
         const herinneringOntbijt = () => {
-            if(tijdTotHerinnering == 0 && currentTime == tijdOntbijt){
+            if(tijdTotHerinnering == 0 && currentTime >= tijdOntbijt && currentTime < tijdTussendoorOchtend){
                 $('#reminder').modal({
                         show: true,
                         backdrop: "static"
@@ -505,7 +532,7 @@ function LoadSpread(json) {
         }
 
         const herinneringTussendoorOchtend = () => {
-            if(tijdTotHerinnering == 0 && currentTime == tijdTussendoorOchtend){
+            if(tijdTotHerinnering == 0 && currentTime >= tijdTussendoorOchtend && currentTime < tijdLunch){
                 $('#reminder').modal({
                         show: true,
                         backdrop: "static"
@@ -516,7 +543,7 @@ function LoadSpread(json) {
         }
 
         const herinneringLunch = () => {
-            if(tijdTotHerinnering == 0 && currentTime == tijdLunch){
+            if(tijdTotHerinnering == 0 && currentTime >= tijdLunch && currentTime < tijdTussendoorMiddag){
                 $('#reminder').modal({
                         show: true,
                         backdrop: "static"
@@ -527,7 +554,7 @@ function LoadSpread(json) {
         }
 
         const herinneringTussendoorMiddag = () => {
-            if(tijdTotHerinnering == 0 && currentTime == tijdTussendoorMiddag){
+            if(tijdTotHerinnering == 0 && currentTime >= tijdTussendoorMiddag && currentTime < tijdAvondeten){
                 $('#reminder').modal({
                         show: true,
                         backdrop: "static"
@@ -538,7 +565,7 @@ function LoadSpread(json) {
         }
 
         const herinneringAvond = () => {
-            if(tijdTotHerinnering == 0 && currentTime == tijdAvondeten){         
+            if(tijdTotHerinnering == 0 && currentTime >= tijdAvondeten && currentTime < tijdTussendoorAvond){         
                 $('#reminder').modal({
                         show: true,
                         backdrop: "static"
@@ -549,7 +576,7 @@ function LoadSpread(json) {
         }
 
         const herinneringTussendoorAvond = () => {
-            if(tijdTotHerinnering == 0 && currentTime == tijdTussendoorAvond){
+            if(tijdTotHerinnering == 0 && currentTime >= tijdTussendoorAvond){
                 $('#reminder').modal({
                         show: true,
                         backdrop: "static"
@@ -652,10 +679,73 @@ function LoadSpread(json) {
 		if (this.checked && getCookie("advice").split("%")[6] != "1") {
 			cookieAdvices(14, 6);
 		}
-		else if (!this.checked && getCookie("advice").split("%")[6] != "1") {
+		else if (!this.checked && getCookie("advice").split("%")[6] != "0") {
 			cookieAdvices(14, 6);
 		}
-    });			
+    });		
+	$("#ietsandersVoorOntbijt").on('change', function() {
+        this.checked=!this.checked?!confirm('Weet u zeker dat u dit wil uitvinken?'):true;
+		if (this.checked && getCookie("advice").split("%")[7] != "1") {
+			cookieAdvices(14, 7);
+		}
+		else if (!this.checked && getCookie("advice").split("%")[7] != "0") {
+			cookieAdvices(14, 7);
+		}
+    });
+	$("#ietsandersOntbijt").on('change', function() {
+        this.checked=!this.checked?!confirm('Weet u zeker dat u dit wil uitvinken?'):true;
+		if (this.checked && getCookie("advice").split("%")[8] != "1") {
+			cookieAdvices(14, 8);
+		}
+		else if (!this.checked && getCookie("advice").split("%")[8] != "0") {
+			cookieAdvices(14, 8);
+		}
+    });
+	$("#ietsandersTussendoorMiddag").on('change', function() {
+        this.checked=!this.checked?!confirm('Weet u zeker dat u dit wil uitvinken?'):true;
+		if (this.checked && getCookie("advice").split("%")[9] != "1") {
+			cookieAdvices(14, 9);
+		}
+		else if (!this.checked && getCookie("advice").split("%")[9] != "0") {
+			cookieAdvices(14, 9);
+		}
+    });
+	$("#ietsandersLunch").on('change', function() {
+        this.checked=!this.checked?!confirm('Weet u zeker dat u dit wil uitvinken?'):true;
+		if (this.checked && getCookie("advice").split("%")[10] != "1") {
+			cookieAdvices(14, 10);
+		}
+		else if (!this.checked && getCookie("advice").split("%")[10] != "0") {
+			cookieAdvices(14, 10);
+		}
+    });
+	$("#ietsandersTussendoorMiddag").on('change', function() {
+        this.checked=!this.checked?!confirm('Weet u zeker dat u dit wil uitvinken?'):true;
+		if (this.checked && getCookie("advice").split("%")[11] != "1") {
+			cookieAdvices(14, 11);
+		}
+		else if (!this.checked && getCookie("advice").split("%")[11] != "0") {
+			cookieAdvices(14, 11);
+		}
+    });
+	$("#ietsandersAvond").on('change', function() {
+        this.checked=!this.checked?!confirm('Weet u zeker dat u dit wil uitvinken?'):true;
+		if (this.checked && getCookie("advice").split("%")[12] != "1") {
+			cookieAdvices(14, 12);
+		}
+		else if (!this.checked && getCookie("advice").split("%")[12] != "0") {
+			cookieAdvices(14, 12);
+		}
+    });
+	$("#ietsandersTussendoorAvond").on('change', function() {
+        this.checked=!this.checked?!confirm('Weet u zeker dat u dit wil uitvinken?'):true;
+		if (this.checked && getCookie("advice").split("%")[13] != "1") {
+			cookieAdvices(14, 13);
+		}
+		else if (!this.checked && getCookie("advice").split("%")[13] != "0") {
+			cookieAdvices(14, 13);
+		}
+    });
 }
 
 
@@ -824,29 +914,36 @@ function checkCookiesAdvice(numberOfAdvices) {
 				case 7:
 					ietsandersVoorOntbijt = true;
 					$('#ietsandersVoorOntbijt input[type=checkbox]').prop('checked',true);
+					document.getElementById('ietsandersVoorOntbijt').style.display = 'flex';
 					break;
 				case 8:
 					ietsandersOntbijt = true;
 					$('#ietsandersOntbijt input[type=checkbox]').prop('checked',true);
+					document.getElementById('ietsandersOntbijt').style.display = 'flex';
 					break;
 				case 9:
 					$('#ietsandersTussendoorOchtend input[type=checkbox]').prop('checked',true);
+					document.getElementById('ietsandersTussendoorOchtend').style.display = 'flex';
 					ietsandersTussendoorOchtend = true;
 					break;
 				case 10:
 					$('#ietsandersLunch input[type=checkbox]').prop('checked',true);
+					document.getElementById('ietsandersLunch').style.display = 'flex';
 					ietsandersLunch = true;
 					break;
 				case 11:
 					$('#ietsandersTussendoorMiddag input[type=checkbox]').prop('checked',true);
+					document.getElementById('ietsandersTussendoorMiddag').style.display = 'flex';
 					ietsandersTussendoorMiddag = true;
 					break;
 				case 12:
 					ietsandersAvond = true;
 					$('#ietsandersAvond input[type=checkbox]').prop('checked',true);
+					document.getElementById('ietsandersAvond').style.display = 'flex';
 					break;
 				case 13:
 					$('#ietsandersTussendoorAvond input[type=checkbox]').prop('checked',true);
+					document.getElementById('ietsandersTussendoorAvond').style.display = 'flex';
 					ietsandersTussendoorAvond = true;
 					break;
 			}
