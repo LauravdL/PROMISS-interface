@@ -288,7 +288,7 @@ function LoadSpread(json) {
     /** Defining what the current time is **/
     const now = new Date();
         let currentTime = stringToTime(now.getHours() + ":" + now.getMinutes());
-        currentTime = stringToTime("19:05");  //this line is commented out so the current computer time is used instead of the breakfast time
+        //currentTime = stringToTime("19:05");  //this line is commented out so the current computer time is used instead of the breakfast time
         //console.log(currentTime);
 
     /** Function to show the right window according to the time **/
