@@ -755,7 +755,7 @@ function LoadSpread(json) {
 /** Add counter on items of extra dietary options slider - changed from Lihn's original:
 Now use a list to store all values. **/
 var extraItems = new Array(); //empty list for all counters extra items
-var numberExtraItems = 12; //number of extra items that exist
+var numberExtraItems = 10; //number of extra items that exist
 //fill extraItems with zeroes
 for (i in Array.from(Array(numberExtraItems).keys())) { 
 	extraItems.push(0);
@@ -823,16 +823,7 @@ function clickExtraItem10(){
     document.getElementById("extraItem10").innerHTML = extraItems[9] + "x";
 	cookieExtraValues();
 }
-function clickExtraItem11(){
-    extraItems[10] += 1;
-    document.getElementById("extraItem11").innerHTML = extraItems[10] + "x";
-	cookieExtraValues();
-}
-function clickExtraItem12(){
-    extraItems[11] += 1;
-    document.getElementById("extraItem12").innerHTML = extraItems[11] + "x";
-	cookieExtraValues();
-}
+
 
 //create/rewrite a cookie for the advice checkboxes
 function cookieAdvices(numberAdvices, indexAdvice) {
