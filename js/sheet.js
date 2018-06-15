@@ -258,21 +258,38 @@ function LoadSpread(json) {
 			cookieAdvices(14, 13);
         }
     });
+	
+	function checkReminderCookie() {
+		if (getCookie("reminder") != "") {
+			if (getCookie("reminder").split("%")[0] == "t") {
+				herinnering = true;}
+			if (getCookie("reminder").split("%")[0] == "f") {
+				herinnering = false;}
+			tijdTotHerinnering = getCookie("reminder").split("%")[1];
+		}
+	}
 
     /** The delay till reminder in secondes/minutes **/
-    const uitstelTijd = 10;
+    const uitstelTijd = 30*60;
     let tijdTotHerinnering = uitstelTijd;
+	
     
     /* Reminder variable */
     let herinnering = false;
+	
+	checkReminderCookie();
+	
+	console.log(getCookie("reminder"));
+	console.log(herinnering);
+	console.log(tijdTotHerinnering);
 
     /* Interval variable */
-    let interval = null;    
+    //let interval = null;    
 
     /** Function for starting the function fn60sec to run every second/minute **/
     function startInterval(){
         /* Run the interval every seconde */
-        interval = setInterval(fn60sec,1000);
+        var interval = setInterval(fn60sec,1000);
         /* Run the interval every minute */
         //interval = setInterval(fn60sec, 60 * 1000);
     };
@@ -320,7 +337,7 @@ function LoadSpread(json) {
 
     startInterval();
 
-    function fn60sec() {        
+    function fn60sec() {   
 
         // als herinnering actief is
         if(herinnering == true){
@@ -602,8 +619,11 @@ function LoadSpread(json) {
         herinneringAvond();
         herinneringTussendoorAvond();
        
-	   
-
+		if (herinnering) {
+			setCookie("reminder", "t%"+ tijdTotHerinnering);
+		} else {
+			setCookie("reminder", "f%1800");
+		}
 
 		//check if there is a value for the counters for extra items in the cookie
 		if (getCookie("extraItems") != "") {
