@@ -185,6 +185,8 @@ function LoadSpread(json) {
 	//Happens if you confirm/later/other the reminder
     $('#reminder .nu-btn').click(function(){
         herinnering = false;
+		setCookie("reminder", "f%1800");
+		tijdTotHerinnering = 60*30;
         if (currentTime >= tijdVoorOntbijt && currentTime < tijdOntbijt){
             $('#voorOntbijt input[type=checkbox]').prop('checked',true);
             voorOntbijtGegeten = true;
@@ -221,6 +223,8 @@ function LoadSpread(json) {
     });
     $('#reminder .anders-btn').click(function(){
         herinnering = false;
+		tijdTotHerinnering = 60*30;
+		setCookie("reminder", "f%1800")
         if (currentTime >= tijdVoorOntbijt && currentTime < tijdOntbijt){
             $('#ietsandersVoorOntbijt input[type=checkbox]').prop('checked',true);
 			document.getElementById('ietsandersVoorOntbijt').style.display = 'flex';
@@ -270,7 +274,7 @@ function LoadSpread(json) {
 	}
 
     /** The delay till reminder in secondes/minutes **/
-    const uitstelTijd = 30*60;
+    const uitstelTijd = 60*30;
     let tijdTotHerinnering = uitstelTijd;
 	
     
@@ -279,12 +283,14 @@ function LoadSpread(json) {
 	
 	checkReminderCookie();
 	
+	
 	console.log(getCookie("reminder"));
 	console.log(herinnering);
 	console.log(tijdTotHerinnering);
 
     /* Interval variable */
-    //let interval = null;    
+    let interval = null; 
+	if (herinnering) { interval = setInterval(fn60sec,1000); }
 
     /** Function for starting the function fn60sec to run every second/minute **/
     function startInterval(){
@@ -525,7 +531,7 @@ function LoadSpread(json) {
         /** Reminder functions **/
 
         const herinneringVoorOntbijt = () => {
-            if(tijdTotHerinnering == 0 && currentTime >= tijdVoorOntbijt && currentTime < tijdOntbijt){
+            if(tijdTotHerinnering <= 0 && currentTime >= tijdVoorOntbijt && currentTime < tijdOntbijt){
                 //Show reminder
                 $('#reminder').modal({
                         show: true,
@@ -538,7 +544,7 @@ function LoadSpread(json) {
         }
 
         const herinneringOntbijt = () => {
-            if(tijdTotHerinnering == 0 && currentTime >= tijdOntbijt && currentTime < tijdTussendoorOchtend){
+            if(tijdTotHerinnering <= 0 && currentTime >= tijdOntbijt && currentTime < tijdTussendoorOchtend){
                 $('#reminder').modal({
                         show: true,
                         backdrop: "static"
@@ -549,7 +555,7 @@ function LoadSpread(json) {
         }
 
         const herinneringTussendoorOchtend = () => {
-            if(tijdTotHerinnering == 0 && currentTime >= tijdTussendoorOchtend && currentTime < tijdLunch){
+            if(tijdTotHerinnering <= 0 && currentTime >= tijdTussendoorOchtend && currentTime < tijdLunch){
                 $('#reminder').modal({
                         show: true,
                         backdrop: "static"
@@ -560,7 +566,7 @@ function LoadSpread(json) {
         }
 
         const herinneringLunch = () => {
-            if(tijdTotHerinnering == 0 && currentTime >= tijdLunch && currentTime < tijdTussendoorMiddag){
+            if(tijdTotHerinnering <= 0 && currentTime >= tijdLunch && currentTime < tijdTussendoorMiddag){
                 $('#reminder').modal({
                         show: true,
                         backdrop: "static"
@@ -571,7 +577,7 @@ function LoadSpread(json) {
         }
 
         const herinneringTussendoorMiddag = () => {
-            if(tijdTotHerinnering == 0 && currentTime >= tijdTussendoorMiddag && currentTime < tijdAvondeten){
+            if(tijdTotHerinnering <= 0 && currentTime >= tijdTussendoorMiddag && currentTime < tijdAvondeten){
                 $('#reminder').modal({
                         show: true,
                         backdrop: "static"
@@ -582,7 +588,7 @@ function LoadSpread(json) {
         }
 
         const herinneringAvond = () => {
-            if(tijdTotHerinnering == 0 && currentTime >= tijdAvondeten && currentTime < tijdTussendoorAvond){         
+            if(tijdTotHerinnering <= 0 && currentTime >= tijdAvondeten && currentTime < tijdTussendoorAvond){         
                 $('#reminder').modal({
                         show: true,
                         backdrop: "static"
@@ -593,7 +599,7 @@ function LoadSpread(json) {
         }
 
         const herinneringTussendoorAvond = () => {
-            if(tijdTotHerinnering == 0 && currentTime >= tijdTussendoorAvond){
+            if(tijdTotHerinnering <= 0 && currentTime >= tijdTussendoorAvond){
                 $('#reminder').modal({
                         show: true,
                         backdrop: "static"
