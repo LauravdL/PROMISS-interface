@@ -66,6 +66,7 @@ function LoadSpread(json) {
     let geslacht = json.sheets[achternaam].data.dataTable[2][1].value;
         if (geslacht == 'vrouw') aanspreekvorm = 'mevrouw';
         if (geslacht == 'man') aanspreekvorm = 'meneer';
+	let naam = json.sheets[achternaam].data.dataTable[1][1].value;
     console.log(geslacht)
     
     /** Variables for dietary advices **/
@@ -360,12 +361,12 @@ function LoadSpread(json) {
             });
             //If gender is 'vrouw'
             if (geslacht == 'vrouw' && voedingsadviesVoorOntbijt !== undefined) {
-                let messageVoorOntbijt = `Goedemorgen ${aanspreekvorm} ${achternaam}, <br /><br /> Voor een goede start van de dag beveelt uw di&#235tist u aan om gelijk te beginnen met een eiwitrijk product. Zullen we beginnen met ${voedingsadviesVoorOntbijt}?`;
+                let messageVoorOntbijt = `Goedemorgen ${aanspreekvorm} ${naam}, <br /><br /> Voor een goede start van de dag beveelt uw di&#235tist u aan om gelijk te beginnen met een eiwitrijk product. Zullen we beginnen met ${voedingsadviesVoorOntbijt}?`;
                 document.getElementById("notification-content").innerHTML = messageVoorOntbijt;
             }
             //If gender is 'man'
             if (geslacht == 'man' && voedingsadviesVoorOntbijt !== undefined) {
-                let messageVoorOntbijt = `Goedemorgen ${aanspreekvorm} ${achternaam}, <br /><br /> Om de dag niet slecht te beginnen, beveelt uw di&#235tist u aan om gelijk te starten met een eiwitrijk product. Zullen we beginnen met ${voedingsadviesVoorOntbijt}?`;
+                let messageVoorOntbijt = `Goedemorgen ${aanspreekvorm} ${naam}, <br /><br /> Om de dag niet slecht te beginnen, beveelt uw di&#235tist u aan om gelijk te starten met een eiwitrijk product. Zullen we beginnen met ${voedingsadviesVoorOntbijt}?`;
                 document.getElementById("notification-content").innerHTML = messageVoorOntbijt;
             }
         }
@@ -376,11 +377,11 @@ function LoadSpread(json) {
                 backdrop: "static"
             });
             if (geslacht == 'vrouw' && voedingsadviesOntbijt !== undefined) {
-                let messageOntbijt = `Goedemorgen ${aanspreekvorm} ${achternaam}, <br /><br /> Tijd voor ontbijt. De di&#235tist beveelt voor het ontbijt ${voedingsadviesOntbijt} aan.`;
+                let messageOntbijt = `Goedemorgen ${aanspreekvorm} ${naam}, <br /><br /> Tijd voor ontbijt. De di&#235tist beveelt voor het ontbijt ${voedingsadviesOntbijt} aan.`;
                 document.getElementById("notification-content").innerHTML = messageOntbijt;
             }
             if (geslacht == 'man' && voedingsadviesOntbijt !== undefined) {
-                let messageOntbijt = `Goedemorgen ${aanspreekvorm} ${achternaam}, <br /><br /> Sla geen ontbijt over. De di&#235tist beveelt voor het ontbijt ${voedingsadviesOntbijt} aan.`;
+                let messageOntbijt = `Goedemorgen ${aanspreekvorm} ${naam}, <br /><br /> Sla geen ontbijt over. De di&#235tist beveelt voor het ontbijt ${voedingsadviesOntbijt} aan.`;
                 document.getElementById("notification-content").innerHTML = messageOntbijt;
             }
         }
@@ -436,11 +437,11 @@ function LoadSpread(json) {
                 backdrop: "static"
             });
             if (geslacht == 'vrouw' && voedingsadviesAvondeten !== undefined) {
-                let messageAvond = `Goedenavond ${aanspreekvorm} ${achternaam}, <br /><br /> Heeft u al honger? Ook voor de avondmaaltijd is het essentieel dat u eiwitten consumeert. Gaat u voor ${voedingsadviesAvondeten}?`;
+                let messageAvond = `Goedenavond ${aanspreekvorm} ${naam}, <br /><br /> Heeft u al honger? Ook voor de avondmaaltijd is het essentieel dat u eiwitten consumeert. Gaat u voor ${voedingsadviesAvondeten}?`;
                 document.getElementById("notification-content").innerHTML = messageAvond;
             }
             if (geslacht == 'man' && voedingsadviesAvondeten !== undefined) {
-                let messageAvond = `Goedenavond ${aanspreekvorm} ${achternaam}, <br /><br /> Heeft u al honger? Ook voor de avondmaaltijd moet u zeker niet eiwitten vergeten te consumeren. Gaat u voor ${voedingsadviesAvondeten}?`;
+                let messageAvond = `Goedenavond ${aanspreekvorm} ${naam}, <br /><br /> Heeft u al honger? Ook voor de avondmaaltijd moet u zeker niet eiwitten vergeten te consumeren. Gaat u voor ${voedingsadviesAvondeten}?`;
                 document.getElementById("notification-content").innerHTML = messageAvond;
             }           
         }
